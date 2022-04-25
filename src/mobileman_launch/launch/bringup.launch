@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--This file servers as the on startup launch file for navigation, it launchs the imu and laser scanner in the pc inside the robot-->
+<!--This file should be run inside the pc in the robot-->
+
+<launch>
+
+    <param
+            name="robot_description"
+            command="$(find xacro)/xacro $(find mobileman_simulation)/urdf/mobileman_gazebo.xacro"/>
+    <!--    launching IMU-->
+    <node name="xsens_mti_node" pkg="xsens_mti_driver" type="xsens_mti_node" output="screen">
+        <rosparam>
+            frame_id: "imu_link"
+            publisher_queue_size: 3
+            pub_imu: true
+            pub_quaternion: true
+            pub_mag: true
+            pub_angular_velocity: true
+            pub_acceleration: true
+            pub_free_acceleration: true
+            pub_dq: true
+            pub_dv: true
+            pub_sampletime: true
+            pub_temperature: true
+            pub_pressure: true
+            pub_gnss: true
+            pub_twist: true
+            pub_transform: true
+            pub_positionLLA: true
+            pub_velocity: true
+            publish_tf: false
+        </rosparam>
+    </node>
+    <!--    Launching hokuyo laser scanner-->
+    <node pkg="urg_node" type="urg_node" name="laser_scan_node">
+        <rosparam>
+            ip_address: "192.168.10.201"
+            frame_id: "hokuyo_link"
+        </rosparam>
+    </node>
+
+    <!--TODO lauching camera or other equipments-->
+    <node name="joy_stick_control" pkg="joy" type="joy_node">
+    </node>
+    <node name="joybasecontrol" pkg="pythonnodes" type="joybasetranslate.py"/>
+    <node name="base_control_nodejs" pkg="rosnodejs_examples" type="JC_base_control.js"/>
+    <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py">
+        <param name="port" value="/dev/ttyACM0"/>
+    </node>
+
+    <!-- add command vel mux to bringup  -->
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+
+    <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet nodelet_manager">
+        <param name="yaml_cfg_file" value="$(find mobileman_navigation)/config/cmd_vel_mux.yaml"/>
+        <remap from="/cmd_vel_mux/cmd_line/cmd_vel" to="/cmd_line/cmd_vel"/>
+        <remap from="/cmd_vel_mux/move_base/cmd_vel" to="/move_base/cmd_vel"/>
+        <remap from="/cmd_vel_mux/joy/cmd_vel" to="/joy/cmd_vel"/>
+        <remap from="/cmd_vel_mux/web/cmd_vel" to="/web/cmd_vel"/>
+        <remap from="/cmd_vel_mux/prototype2/cmd_vel" to="/prototype2/cmd_vel"/>
+    </node>
+    <!--TODO lauching robot controller-->
+
+<!--    To launch tf trnaformations-->
+    <node
+            name="joint_state_publisher"
+            pkg="joint_state_publisher"
+            type="joint_state_publisher">
+        <!-- <rosparam param="source_list">["prototype2/joint_states"]</rosparam> -->
+    </node>
+    <node
+            name="robot_state_publisher"
+            pkg="robot_state_publisher"
+            type="robot_state_publisher" />
+
+    <!-- launching TF transformation -->
+<!--    <node name="tf_laser" pkg="tf" type="static_transform_publisher" args="0 0 0.40 0 0 0 /base_link /base_laser 20"/>-->
+<!--    <node name="tf_imu" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /imu_link 20"/>-->
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+
+    <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet nodelet_manager">
+        <param name="yaml_cfg_file" value="$(find mobileman_navigation)/config/cmd_vel_mux.yaml"/>
+        <remap from="/cmd_vel_mux/cmd_line/cmd_vel" to="/cmd_line/cmd_vel"/>
+        <remap from="/cmd_vel_mux/joy/cmd_vel" to="/joy/cmd_vel"/>
+        <remap from="/cmd_vel_mux/prototype2/cmd_vel" to="/prototype2/cmd_vel"/>
+    </node>
+
+</launch>

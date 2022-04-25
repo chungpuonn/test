@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="base_footprint" params="length width positionZ">
+        <link name="base_footprint">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${positionZ}"/>
+                <geometry>
+                    <box size="${length} ${width} 0.01"/>
+                </geometry>
+                <material name="green"/>
+            </visual>
+        </link>
+        <joint name="base_footprint_joint" type="fixed">
+                <parent link="base_footprint"/>
+                <child link="base_link"/>
+                <origin rpy="0 0 0" xyz="0 0 ${positionZ}"/>
+        </joint>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:keepScreenOn="true"
+    tools:context=".QuicabotAbout">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/aboutPageGuidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+
+    <ImageView
+        android:id="@+id/circleLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/transforma_logo"
+        app:layout_constraintBottom_toTopOf="@id/textLogo"
+        app:layout_constraintEnd_toStartOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/textLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/circleLogo" />
+
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/textLogo"
+        app:layout_constraintEnd_toStartOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/aboutUs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@id/contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About Us"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/aboutUsContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/about_string"
+                android:textColor="@color/colorSecondary"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/contact"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@id/copyrightString"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintTop_toBottomOf="@id/aboutUs">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Contact Us"
+                android:textColor="@color/colorSecondaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_string"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:foreground="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="phoneCall"
+                android:text="@string/phone_number"
+                android:textColor="@color/colorSecondaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:foreground="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="writeEmail"
+                android:text="@string/company_email"
+                android:textColor="@color/colorSecondaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_margin="2dp"
+        android:id="@+id/copyrightString"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/copyright"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/aboutPageGuidelineCenter"
+        app:layout_constraintTop_toBottomOf="@id/contact" />
+
+    <TextView
+        android:foreground="?android:selectableItemBackground"
+        android:id="@+id/lisense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="seeLicence"
+        android:text="Licence"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contact" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

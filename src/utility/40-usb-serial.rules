@@ -1,0 +1,1 @@
+KERNEL=="ttyACM*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0043", ATTRS{serial}=="9523234383335101C211", SYMLINK+="SBF", MODE="0666"

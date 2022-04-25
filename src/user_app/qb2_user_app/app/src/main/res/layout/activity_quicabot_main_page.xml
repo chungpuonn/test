@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".QuicabotMainPage"
+    android:keepScreenOn="true">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <FrameLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/orangeFrame"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:background="@color/colorSecondary" >
+
+            </FrameLayout>
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/orangeFrame"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                android:id="@+id/quicaBotName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/quicabot_b20"
+                android:textColor="@color/colorSecondary"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toEndOf="@id/orangeFrame"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/quicaBotName"
+                android:id="@+id/quicaBotImg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/quicaBotName"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/quicabot"
+                android:contentDescription="TODO" />
+
+            <Switch
+                android:id="@+id/powerSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="30dp"
+                android:checked="true"
+                android:onClick="SwitchingPower"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:text="Power"
+                android:textColor="@color/colorSecondary"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toStartOf="@id/reboot"
+                app:layout_constraintTop_toTopOf="@id/reboot" />
+
+            <ImageView
+                android:foreground="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/menu"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="3dp"
+                android:elevation="3dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="ShowMenu"
+                android:src="@drawable/more"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:foreground="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toStartOf="@id/menu"
+                app:layout_constraintTop_toTopOf="@id/menu"
+                android:id="@+id/reboot"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:elevation="3dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="showBattery"
+                android:src="@drawable/battery4"
+                android:contentDescription="TODO" />
+
+            <Button
+
+                android:id="@+id/inspectionMode"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="4dp"
+                android:onClick="workingMode"
+                android:text="Inspection \n mode"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                app:backgroundTint="@color/colorSecondary"
+                app:layout_constraintTop_toBottomOf="@id/guideline2"
+                app:layout_constraintBottom_toBottomOf="@id/controllerMode"
+                app:layout_constraintEnd_toStartOf="@+id/controllerMode"
+                app:layout_constraintStart_toEndOf="@+id/quicaBotImg" />
+
+            <Button
+                android:onClick="workingMode"
+                android:id="@+id/controllerMode"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="4dp"
+                android:text="Controller \n mode"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                app:backgroundTint="@color/colorSecondary"
+                app:layout_constraintTop_toBottomOf="@id/mappingMode"
+                app:layout_constraintStart_toEndOf="@id/inspectionMode"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <Button
+                android:id="@+id/mappingMode"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="4dp"
+                android:onClick="workingMode"
+                android:text="Mapping Mode"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                app:backgroundTint="@color/colorSecondary"
+                app:layout_constraintBottom_toTopOf="@+id/controllerMode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/controllerMode"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="TEST"-->
+    <!--android:onClick="subscribe"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

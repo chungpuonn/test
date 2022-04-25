@@ -1,0 +1,104 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+        <item name="colorControlActivated">@color/colorSecondaryDark</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+
+
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorSecondaryDark</item>
+    </style>
+
+    <style name="button_inspection_mode_command">
+        <item name="android:elevation">4dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="textview_defects_location">
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">3dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="cardview_textview_defects_location">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:elevation">3dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="textview_seperate_count">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:fontFamily">@font/anton</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorSpecial</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="textview_defects_type_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="inspection_result_container_cardview">
+        <item name="android:layout_width">220dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <style name="insepction_result_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="insepction_result_content_card">
+        <item name="android:elevation">2dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="general_title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>

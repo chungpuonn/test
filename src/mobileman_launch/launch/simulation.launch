@@ -1,0 +1,35 @@
+<?xml version= "1.0" ?>
+<!--this file launch the simulation environment for mobileman-->
+<launch>
+    <arg name="mode" default="test"/>
+    <arg name="isSimulation" value="true"/>
+    <!--    load gazebo file for simulation-->
+    <!--    TODO current using agriculture world, check my own world launch file-->
+    <include file="$(find mobileman_simulation)/launch/gazebo.launch">
+        <!-- <arg name="world_used" value="~/.gazebo/worlds/agriculture.world"/> -->
+    </include>
+
+    <!--    spawn a robot in the simulation world-->
+    <include file="$(find mobileman_simulation)/launch/spawn_mobileman.launch"/>
+
+
+    <!-- include display launch -->
+
+    <include file="$(find mobileman_simulation)/launch/display.launch"/>
+
+    <!-- launch navigation node -->
+    <include file="$(find mobileman_navigation)/launch/mobileman_navigation.launch"/>
+
+    <!--    do the following for mapping mode-->
+    <group if="$(eval mode== 'mapping')">
+        <remap from="$(arg laser_frame)" to="horizontal_laser_2d"/>
+        <remap from="/imu" to="/imu/data"/>
+        <node name="cartographer_node" pkg="cartographer_ros"
+              type="cartographer_node" args="
+          -configuration_directory $(find mobileman_navigation)/config
+                   -configuration_basename mobileman.lua"
+              output="screen">
+        </node>
+    </group>
+
+</launch>

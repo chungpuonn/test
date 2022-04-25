@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        
+        android:id="@+id/wallAuto"
+        android:title="@string/wall_auto"
+        />
+
+    <item
+        android:id="@+id/wallCol"
+        android:title="@string/wall_column"/>
+
+    <item android:id="@+id/single"
+        android:title="@string/single"/>
+
+    <item android:id="@+id/floor"
+        android:title="@string/floor"/>
+
+</menu>

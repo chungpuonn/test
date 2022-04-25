@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--This file is the unified launch file for mobileman prototype2-->
+<launch>
+    <arg name="isSimulation" default="false"/>
+    <arg name="world_used" default="hospital"/>
+    <arg name="visualization" default="true"/>
+
+    <arg name="mode" default="mapping"/>
+    <arg name="use_amcl" default="false"/>
+    <arg name="use_map_topic" default="true"/>
+
+    <arg name="scan_topic" default="/laser/scan" />
+    <arg name="laser_frame" default="/hokuyo_link"/>
+
+
+    <group if="$(arg isSimulation)">
+<!--        launch gazebo and spwan a robot-->
+        <include file="$(find mobileman_simulation)/launch/gazebo.launch">
+            <arg name="world_used" value="$(arg world_used)"/>
+        </include>
+    </group>
+
+    <include file="$(find mobileman_joy_control)/launch/joy_control.launch">
+        <arg name="isSimulation" value="$(arg isSimulation)"/>
+    </include>
+    <group if="$(arg visualization)">
+        <include file="$(find mobileman_simulation)/launch/display.launch"/>
+    </group>
+
+
+    <include file="$(find mobileman_navigation)/launch/mobileman_navigation.launch">
+    <arg name="use_amcl" value="$(arg use_amcl)"/>
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+        <arg name="mode" value="$(arg mode)"/>
+        <arg name="laser_frame" value="$(arg laser_frame)"/>
+        <arg name="isSimulation" value="$(arg isSimulation)"/>
+    </include>
+
+
+</launch>

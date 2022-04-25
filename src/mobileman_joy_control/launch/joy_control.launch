@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--this files launch the necessary node for teleoperating mobileman using joystick
+-->
+<launch>
+    <arg name="isSimulation" default="true"/>
+    <rosparam file="$(find mobileman_joy_control)/config/joycontrol.yaml" command="load"/>
+<!--load ros parameter-->
+
+   
+<node pkg="joy" type ="joy_node" name="joynode" output="screen">
+    </node>
+
+    <group  if="$(arg isSimulation)">
+     <node pkg="teleop_twist_joy" type="teleop_node" name="mobileman_teleop_node">
+    
+        <remap from="cmd_vel" to="/prototype2/mobile_base_controller/cmd_vel"  />
+        </node>
+    </group>
+    
+       <group  unless="$(arg isSimulation)">
+     <node pkg="teleop_twist_joy" type="teleop_node" name="mobileman_teleop_node">
+        </node>
+    </group>
+
+
+       
+</launch>

@@ -1,0 +1,3 @@
+<launch>imu_link
+    <node name="tf_imu" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /map /world 10"/>
+</launch>

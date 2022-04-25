@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:baselineAligned="false"
+    android:keepScreenOn="true"
+    tools:context=".QuicabotInspectionMode">
+    <TextView
+        android:id="@+id/imageStreamTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/image_of_crack"
+        android:textColor="@color/colorSecondary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@id/imageStreamCard"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageStreamCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <WebView
+            android:id="@+id/imageStreamCrack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+
+        <WebView
+            android:id="@+id/imageStreamUneven"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+        </WebView>
+
+        <WebView
+            android:id="@+id/imageStreamLippage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+        </WebView>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <ImageView
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="5dp"
+        android:id="@+id/imageView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        android:contentDescription="TODO"
+        android:onClick="generatePointCloud"
+        android:src="@drawable/pointcloud"
+        app:layout_constraintBottom_toBottomOf="@+id/flipImage"
+        app:layout_constraintEnd_toStartOf="@id/flipImage"
+        app:layout_constraintTop_toTopOf="@id/imageStreamCard" />
+
+    <ImageView
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/flipImage"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        android:contentDescription="TODO"
+        android:onClick="FlipImage"
+        android:elevation="5dp"
+        android:src="@drawable/flip"
+        app:layout_constraintBottom_toBottomOf="@+id/genReport"
+        app:layout_constraintEnd_toStartOf="@id/genReport"
+        app:layout_constraintTop_toTopOf="@id/imageStreamCard" />
+
+    <ImageView
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/genReport"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:elevation="5dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="genReport"
+        android:src="@drawable/export"
+        app:layout_constraintEnd_toEndOf="@id/imageStreamCard"
+        app:layout_constraintTop_toTopOf="@id/imageStreamCard" />
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/totalDefectsCountCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="3dp"
+        app:layout_constraintBottom_toTopOf="@id/crackanddmgCountCard"
+        app:layout_constraintEnd_toStartOf="@id/controllerMode"
+        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="viewInspectionSummary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/general_title"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Total Defects"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/totalDefectsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/anton"
+                android:text="0"
+                android:textColor="@color/colorSpecial"
+                android:textSize="27sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:foreground="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="5dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/controllerMode"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="controllerMode"
+        android:padding="0dp"
+        android:text="Controller Mode"
+        android:src="@drawable/control_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@id/crackanddmgCountCard"
+        app:layout_constraintStart_toEndOf="@id/totalDefectsCountCard" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/crackanddmgCountCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:visibility="visible"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="3dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonPause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@id/totalDefectsCountCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/crackanddmgTitle"
+                style="@style/textview_defects_type_title"
+                android:text="Crack &amp; Damage"
+                app:layout_constraintBottom_toTopOf="@id/unevenessTitle"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unevenessTitle"
+                style="@style/textview_defects_type_title"
+                android:text="Uneveness"
+                app:layout_constraintBottom_toTopOf="@id/misAlignTitle"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/crackanddmgTitle" />
+
+            <TextView
+
+                android:id="@+id/misAlignTitle"
+                style="@style/textview_defects_type_title"
+                android:text="Mis-Alignment"
+                app:layout_constraintBottom_toTopOf="@id/lippageTitle"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/unevenessTitle" />
+
+            <TextView
+                android:id="@+id/lippageTitle"
+                style="@style/textview_defects_type_title"
+                android:text="Lippage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/misAlignTitle" />
+
+            <TextView
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/unevenessCount"
+                android:id="@+id/crackanddmgCount"
+                style="@style/textview_seperate_count"
+                android:text="0" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/crackanddmgCount"
+                app:layout_constraintBottom_toTopOf="@id/misAlignCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/unevenessCount"
+
+                style="@style/textview_seperate_count"
+                android:text="0" />
+
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/unevenessCount"
+                app:layout_constraintBottom_toTopOf="@id/lippageCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/misAlignCount"
+                style="@style/textview_seperate_count"
+                android:text="0" />
+
+            <TextView
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/misAlignCount"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/lippageCount"
+                style="@style/textview_seperate_count"
+                android:text="0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <Button
+        android:id="@+id/buttonPause"
+        style="@style/button_inspection_mode_command"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:onClick="inspectionPause"
+        android:padding="0dp"
+        android:text="Pause"
+        app:layout_constraintBottom_toTopOf="@id/buttonQuit"
+        app:layout_constraintEnd_toStartOf="@+id/buttonStop"
+
+        app:layout_constraintTop_toBottomOf="@id/crackanddmgCountCard"
+        app:layout_constraintStart_toEndOf="@id/guidelineCenter" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        style="@style/button_inspection_mode_command"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:onClick="inspectionStop"
+        android:text="STOP"
+        app:layout_constraintBottom_toTopOf="@id/buttonAddJob"
+        app:layout_constraintTop_toBottomOf="@id/crackanddmgCountCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonPause" />
+
+    <Button
+        android:id="@+id/buttonQuit"
+        android:textColor="@color/colorAccent"
+        android:backgroundTint="@color/colorSpecial"
+        android:elevation="4dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:onClick="inspectionQuit"
+        android:text="Quit"
+        app:layout_constraintTop_toBottomOf="@id/buttonStop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonAddJob"
+         />
+
+    <Button
+        android:id="@+id/buttonAddJob"
+        style="@style/button_inspection_mode_command"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+
+        android:onClick="addingInspectionJob"
+        android:text="Add JOB"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/buttonStop"
+        app:layout_constraintEnd_toStartOf="@id/buttonQuit"
+        app:layout_constraintStart_toEndOf="@id/guidelineCenter" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

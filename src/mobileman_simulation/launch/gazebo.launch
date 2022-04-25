@@ -1,0 +1,42 @@
+<launch>
+
+<!--  load world-->
+  <!-- <include
+    file="$(find cpr_agriculture_gazebo)/launch/agriculture_world.launch" /> -->
+     
+     <!-- use office world -->
+ <arg name="world_used" default="hospital"/>
+ <group if="$(eval world_used=='hospital')">
+  <include file="$(find aws_robomaker_hospital_world)/launch/view_hospital.launch">
+   <!-- <arg name ="isPaused" value="false"/> -->
+  </include>
+ </group>
+
+ <group if="$(eval world_used=='agriculture')">
+ <include file="$(find cpr_agriculture_gazebo)/launch/agriculture_world.launch" />
+
+ </group>
+
+
+ <group if="$(eval world_used=='agriculture')">
+   <include file="$(find cpr_office_gazebo)/launch/office_world.launch"/>
+ </group>
+
+ <!--    spawn a robot in the simulation world-->
+ <!-- <include file="$(find mobileman_simulation)/launch/spawn_mobileman.launch"/> -->
+ <!-- -->
+
+
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+<!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"-->
+<!--    respawn="false" output="screen">-->
+<!--    <remap from="/joint_states" to="/prototype2/joint_states" />-->
+<!--  </node>-->
+
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+</launch>

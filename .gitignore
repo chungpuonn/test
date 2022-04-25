@@ -1,32 +1,40 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+/devel/*
+/build/*
+/Dox/*
+/logs/*
+/log/*
+/.catkin_tools/*
+/.vs
+/src/.clangd/*
+src/.clangd
+src/.idea/*
+/src/slamware_ros_sdk/out/build/x64-Debug (default)/.cmake/api/v1/query/client-MicrosoftVS
+/src/slamware_sdk/out/build/x64-Debug (default)
+/src/slamware_ros_sdk/out/build/x64-Debug (default)
+/windows/*
+/src/rplidar_sdk/
+/src/rplidar_matlab/.vs/*
+/src/rplidar_matlab/out/build/x64-Debug (default)
+/src/rplidar_matlab/out/*
+/src/rplidar_matlab/rplidar_driver/out/*
+# /src/rplidar_matlab/rplidar_driver/.vs/*
+/src/rplidarDriver/.vs/rplidarDriver/v16
+/src/rplidarDriver/Debug
+/src/rplidarDriver/rplidarDriver.sln
+/src/slamware_sdk_linux/
+/src/rplidar_matlab/rplidar_driver/.vs
+*.filters
+*.vcxproj
+*.user
+.vscode/settings.json
+.gitignore
+src/rplidar_sdk
+/src/out/build
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
-*.lib
+*.dpp
+*.d
+.idea/
+src/depends/xsens_ros_mti_driver/src/.vscode/
+/src/depends/openslam_gmapping
 
-# Executables
-*.exe
-*.out
-*.app
