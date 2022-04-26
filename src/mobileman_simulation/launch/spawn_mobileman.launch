@@ -24,8 +24,18 @@
   
 
   <!-- Adding transforamtion to the simulated sensors -->
-    <!-- Adding static TF transformation -->
-
- <include file="$(find mobileman_simulation)/launch/tf_broadcasts.launch"/>
+    <!--TF transformations are handled by robot state publisher  -->
+  <!-- <node
+  name="joint_state_publisher"
+  pkg="joint_state_publisher"
+  type="joint_state_publisher"> -->
+    <!-- <rosparam param="source_list">["prototype2/joint_states"]</rosparam> -->
+  <!-- </node> -->
+  <!-- <node
+     name="robot_state_publisher"
+     pkg="robot_state_publisher"
+     type="robot_state_publisher" />
+  -->
+ <!--<include file="$(find mobileman_simulation)/launch/tf_broadcasts.launch"/>-->
 
 </launch>

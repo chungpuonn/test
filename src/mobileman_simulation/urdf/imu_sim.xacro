@@ -7,7 +7,7 @@
       <update_rate>100</update_rate>
       <visualize>true</visualize>
       <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>/imu/data</topicName>
+        <topicName>/gazebo/imu/data</topicName>
         <bodyName>imu_link</bodyName>
         <updateRateHZ>100.0</updateRateHZ>
         <gaussianNoise>0.0</gaussianNoise>
