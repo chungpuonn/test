@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--This file is the unified launch file for mobileman prototype2-->
+<!--only rviz will be launched during robot running-->
+
 <launch>
-    <arg name="isSimulation" default="false"/>
+
+  <include file="$(find mobileman_launch)/launch/rviz_only.launch"/>
+    <!--<arg name="isSimulation" default="false"/>
     <arg name="world_used" default="hospital"/>
     <arg name="visualization" default="true"/>
 
@@ -14,7 +18,7 @@
 
 
     <group if="$(arg isSimulation)">
-<!--        launch gazebo and spwan a robot-->
+--><!--        launch gazebo and spwan a robot--><!--
         <include file="$(find mobileman_simulation)/launch/gazebo.launch">
             <arg name="world_used" value="$(arg world_used)"/>
         </include>
@@ -34,7 +38,7 @@
         <arg name="mode" value="$(arg mode)"/>
         <arg name="laser_frame" value="$(arg laser_frame)"/>
         <arg name="isSimulation" value="$(arg isSimulation)"/>
-    </include>
+    </include>-->
 
 
 </launch>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--used to calculate the fused odometry. to be run on the robot-->
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node" output="screen">
+        <rosparam file="$(find mobileman_navigation)/config/robot_localization/ekf_localization_node.yaml"
+                  command="load"/>
+        <!-- <remap from="odom" to="/odometry/filtered" /> -->
+        <remap from="/odometry/filtered" to="odom"/>
+    </node>
+</launch>

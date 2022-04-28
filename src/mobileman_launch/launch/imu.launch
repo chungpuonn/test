@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--this files launchs the xsens imu-->
+<launch>
+  <node name="xsens_mti_node" pkg="xsens_mti_driver" type="xsens_mti_node" output="screen">
+    <rosparam>
+      frame_id: "imu_link"
+      publisher_queue_size: 3
+      pub_imu: true
+      pub_quaternion: true
+      pub_mag: true
+      pub_angular_velocity: true
+      pub_acceleration: true
+      pub_free_acceleration: true
+      pub_dq: true
+      pub_dv: true
+      pub_sampletime: true
+      pub_temperature: true
+      pub_pressure: true
+      pub_gnss: true
+      pub_twist: true
+      pub_transform: true
+      pub_positionLLA: true
+      pub_velocity: true
+      publish_tf: false
+    </rosparam>
+  </node>
+  <!--    Launching hokuyo laser scanner-->
+  <node pkg="urg_node" type="urg_node" name="laser_scan_node">
+    <rosparam>
+      ip_address: "192.168.10.201"
+      frame_id: "hokuyo_link"
+    </rosparam>
+  </node>
+</launch>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!--This file servers as the on startup launch file for navigation, it launchs the imu and laser scanner in the pc inside the robot-->
+<!--This file servers as the on startup launch file for navigation, it launches the imu and laser scanner in the pc inside the robot-->
 <!--This file should be run inside the pc in the robot-->
 
 <launch>
@@ -41,7 +41,10 @@
     </node>
 
     <!--TODO lauching camera or other equipments-->
-    <node name="joy_stick_control" pkg="joy" type="joy_node">
+
+<!--    joystick control-->
+  <!--this part is the control part of the robot-->
+    <node name="joy_stick_control" pkg="joy" type="joy_node" args="_coalesce_interval:=0.05 _autorepeat_rate:=12 _deadzone:=0.05" >
     </node>
     <node name="joybasecontrol" pkg="pythonnodes" type="joybasetranslate.py"/>
     <node name="base_control_nodejs" pkg="rosnodejs_examples" type="JC_base_control.js"/>
@@ -74,16 +77,59 @@
             pkg="robot_state_publisher"
             type="robot_state_publisher" />
 
+<!--    robot pose ekf, to calculate the odometry of the robot-->
+<!--    to be tested seperately-->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node" output="screen">
+        <rosparam file="$(find mobileman_navigation)/config/robot_localization/ekf_localization_node.yaml"
+                  command="load"/>
+        <rosparam>
+            frequency: 30
+            sensor_timeout: 10
+            two_d_mode: true
+            map_frame: "/map"
+            odom_frame: "/odom"
+            base_link_frame: "/base_link"
+            # base_link_frame: "/base_link"
+            world_frame: "/odom"  #odom
+            base_link_output_frame: "/base_footprint" #footprint
+            # base_link_output_frame: "/base_link" #footprint
+
+            # publishing transformation
+            publish_tf: true
+
+            transform_time_offset: 0.2
+            transform_timeout: 0.3
+
+            imu0: "/imu/data"
+            odom0_relative: true
+            imu0_relative: true
+            imu0_queue_size: 4
+            imu0_remove_gravitational_acceleration: true
+
+            odom0: "/odom_raw"
+            odom0_config: [true, true, false,
+            false, false, true,
+            true, false, false,
+            false, false, true,
+            false, false, false]
+
+            "imu0_config": [false, false, false,
+            false, false, true,
+            false, false, false,
+            false, false, true,
+            true, false, false]
+
+            print_diagnostics: true
+
+        </rosparam>
+    </node>
+
+<!--    add cartographer -->
+<!--    add move_base-->
+
     <!-- launching TF transformation -->
 <!--    <node name="tf_laser" pkg="tf" type="static_transform_publisher" args="0 0 0.40 0 0 0 /base_link /base_laser 20"/>-->
 <!--    <node name="tf_imu" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /imu_link 20"/>-->
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
 
-    <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet nodelet_manager">
-        <param name="yaml_cfg_file" value="$(find mobileman_navigation)/config/cmd_vel_mux.yaml"/>
-        <remap from="/cmd_vel_mux/cmd_line/cmd_vel" to="/cmd_line/cmd_vel"/>
-        <remap from="/cmd_vel_mux/joy/cmd_vel" to="/joy/cmd_vel"/>
-        <remap from="/cmd_vel_mux/prototype2/cmd_vel" to="/prototype2/cmd_vel"/>
-    </node>
 
 </launch>
