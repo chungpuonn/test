@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+<robot name="prototype2" xmlns:xacro="https://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find mobileman_simulation)/urdf/wheel.xacro"/>
+  <!--use simulation-->
+  <xacro:property name="isSimulation" value="true"/>
+  <!--baselink name-->
+  <xacro:property name="base_link" value="base_link"/>
+  <!--robot name-->
+  <xacro:property name="robot_name" value="/prototype2"/>
+
+  <!--Robot Chassis-->
+  <!-- <xacro:include filename="$(find mobileman_simulation)/urdf/base_footprint.xacro"/> -->
+
+  <xacro:include filename="$(find mobileman_simulation)/urdf/chassis.xacro"/>
+
+  <!-- dumylink for robot chasis inertial -->
+  <xacro:include filename="$(find mobileman_simulation)/urdf/parts/dummy_link.xacro"/>
+  <!--Wheels-->
+  <xacro:link_wheel name="front_left" radius="0.2155"/>
+  <xacro:joint_wheel name="front_left" origin_xyz="0 0.257 -0.0"/>
+
+  <xacro:link_wheel name="front_right" radius="0.2155"/>
+  <xacro:joint_wheel name="front_right" origin_xyz="0 -0.257 -0.0"/>
+
+  <xacro:link_wheel name="rear_left" radius="0.131"/>
+  <xacro:joint_wheel name="rear_left" origin_xyz="-0.547 0.257 -0.0845"/>
+
+  <xacro:link_wheel name="rear_right" radius="0.131"/>
+  <xacro:joint_wheel name="rear_right" origin_xyz="-0.547 -0.257 -0.0845"/>
+
+  <!--fork_lift-->
+  <xacro:include filename="$(find mobileman_simulation)/urdf/fork_lift.xacro"/>
+
+  <!--IMU-->
+  <xacro:include filename="$(find mobileman_simulation)/urdf/imu.xacro"/>
+
+  <!--Laser Scanner-->
+  <xacro:include filename="$(find mobileman_simulation)/urdf/hokuyo.xacro"/>
+
+  <link
+        name = "base_footprint"></link>
+    <joint name="base_foot_joint" type="fixed" >
+        <parent link="base_footprint" />
+        <child link="${base_link}" />
+        <origin xyz="0 0 0.2155" rpy="0 0 0" />
+    </joint>
+
+  <!--PhoXi 3D Scanner M  -->
+  <link name="photoneo_3d_scanner"> 
+    <inertial>
+      <origin
+        xyz="0.011952 0.0002462 -6.0567E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.067361" />
+      <inertia
+        ixx="4.1058E-05"
+        ixy="3.6778E-07"
+        ixz="-1.7672E-09"
+        iyy="5.9376E-06"
+        iyz="-4.2174E-09"
+        izz="4.1185E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.068 0.416 0.077"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="photoneo_3d_scanner_joint"
+    type="revolute">
+    <origin
+      xyz="-0.1 0.7 0"
+      rpy="1.571 0 0" />
+    <parent
+      link="Link1" />
+    <child
+      link="photoneo_3d_scanner" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0.0"
+      upper="1.6"
+      effort="50"
+      velocity="10" />
+  </joint>
+
+  <!-- differetial driver controller -->
+  <xacro:if value="${isSimulation}">
+<!--    either differtial_drive_controller should be used or the transmission should be used. -->
+ <xacro:include filename="$(find mobileman_simulation)/urdf/differential_drive_controller.xacro"/>
+    <transmission name="left_wheel">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="front_left_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="left_motor">
+        <mechanicalReduction>50</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="right_wheel">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="front_right_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="right_motor">
+        <mechanicalReduction>50</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="3d_scanner">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="photoneo_3d_scanner_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="3d_scanner_motor">
+        <mechanicalReduction>50</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <!--ros control plugin-->
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>${robot_name}</robotNamespace>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+</robot>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+   <!--adding dummy wheels to simulate track-->
+  <!-- <xacro:include filename="$(find mobileman_simulation)/urdf/wheel.xacro"/>
+  <xacro:link_wheel name="left_wheel" radius ="0.07"/>
+  <xacro:joint_wheel name="left_wheel" origin_xyz = "0 0.257 0"/> -->
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>20</updateRate>
+      <leftJoint>front_left_joint</leftJoint>
+      <rightJoint>front_right_joint</rightJoint>
+      <wheelSeparation>0.514</wheelSeparation>
+      <wheelDiameter>0.431</wheelDiameter>
+      <torque>20</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+   </plugin>
+  </gazebo>
+
+</robot>

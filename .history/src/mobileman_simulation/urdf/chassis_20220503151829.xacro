@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot>
+<link
+    name="${base_link}">
+    <inertial>
+      <origin
+        xyz="-0.0 -0.0 0.0"
+        rpy="0 0 0" />
+      <mass
+        value="267" />
+      <inertia
+        ixx="17.61"
+        ixy="0"
+        ixz="0"
+        iyy="5.303"
+        iyz="0"
+        izz="18.377" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobileman_simulation/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="material">
+        <color rgba="0.8 0.4 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+         <geometry>
+                <box size="0.370 0.832 0.320"/>
+            </geometry>
+    </collision>
+  </link>
+</robot>
+
+<gazebo reference="base_link">
+  <material>Gazebo/Black</material>
+</gazebo>

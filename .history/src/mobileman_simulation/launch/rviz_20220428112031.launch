@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+    <!--  this file launchs the rviz enviroment with a robot model-->
+  <!--this file is for simulation only-->
+    <arg
+            name="model"/>
+    <param
+            name="robot_description"
+            command="$(find xacro)/xacro $(find mobileman_simulation)/urdf/mobileman_gazebo.xacro"/>
+    <node name="rviz" pkg="rviz" type="rviz" required="true"
+          args="-d $(find mobileman_simulation)/rviz/demo_2d.rviz"/>
+</launch>
