@@ -1,0 +1,10 @@
+controller_list:
+  - name: fake_photoneo_3d_scanner_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - fork_rotational_joint
+      - fork_linear_joint
+      - photoneo_3d_scanner_joint
+initial:  # Define initial robot poses.
+  - group: photoneo_3d_scanner
+    pose: home

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--this file launch the simulation environment for mobileman-->
+<launch>
+  <arg name="mode" default="test" />
+  <arg name="isSimulation" value="true" />
+  <arg name="no_static_map" default="false" />
+  <arg name="cmd_vel_name" default="/move_base/cmd_vel" />
+
+  <arg name="base_global_planner" default="navfn/NavfnROS" />
+  <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS" />
+  <!--    load gazebo file for simulation-->
+  <!--    TODO current using agriculture world, check my own world launch file-->
+  <include file="$(find mobileman_simulation)/launch/gazebo.launch">
+    <!-- <arg name="world_used" value="~/.gazebo/worlds/agriculture.world"/> -->
+  </include>
+
+  <!--    spawn a robot in the simulation world-->
+  <include file="$(find mobileman_simulation)/launch/spawn_mobileman.launch" />
+
+
+  <!-- cartographer -->
+  <!--    do the following for mapping mode-->
+  <!-- <include file="$(find mobileman_simulation)/launch/cartographer_v2.launch"/> -->
+
+  <!--move base-->
+
+  <!-- include display launch -->
+  <!-- <include file="$(find mobileman_simulation)/launch/display.launch" /> -->
+
+  <!-- controlling the robot  -->
+  <!-- <include file="$(find mobileman_simulation)/launch/control.launch">
+    <arg name="output_topic" value="/prototype2/mobile_base_controller/cmd_vel" />
+  </include> -->
+
+  <!-- launch a joystick -->
+  <!-- <include file="$(find mobileman_joy_control)/launch/joy_control.launch" /> -->
+</launch>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+      <arg name="publish_tf" default="true" doc="whether or not publish tf data for photoneo"/>
+      <arg name="z_photoneo"       default="2.3" />
+      <arg name="world"      default="assembly_line"/>
+
+      <!-- Start Gazebo -->
+      <!-- <env name="GAZEBO_RESOURCE_PATH" value="$(find leica_gazebo_simulation)/meshes" />
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="world_name" value="$(find leica_gazebo_simulation)/worlds/$(arg world).world"/>
+            <arg name="paused"     value="true"/>
+      </include> -->
+
+      <!-- spawn photoneo in gazebo -->
+      <!-- <param command="$(find xacro)/xacro -i $(find leica_gazebo_simulation)/urdf/photoneo_3d_scanner.xacro" name="photoneo_param"/>
+      <node args="-urdf -param photoneo_param -model photoneo -x 3.6 -y 2.4 -z $(arg z_photoneo) -Y -3.14159"
+            name="spawn_photoneo" pkg="gazebo_ros" type="spawn_model" output="screen"/> -->
+
+      <!-- Tf photoneo_link to world -->
+      <node if="$(arg publish_tf)"
+            name="tf_broadcaster" pkg="leica_gazebo_simulation" type="publish_tf.py" output="screen"/>
+      
+      <node if="$(arg publish_tf)"
+            pkg="tf" type="static_transform_publisher" name="photoneo_sensor_tf"  
+            args="0 0 -0.073 0.707 0 0 0.707 photoneo_link sensor_link 100"/>
+        
+</launch>

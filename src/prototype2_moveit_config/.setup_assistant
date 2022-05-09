@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: mobileman_simulation
+    relative_path: urdf/mobileman_gazebo.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/prototype2.srdf
+  CONFIG:
+    author_name: chungpuonn
+    author_email: POChung@transformarobotics.com
+    generated_timestamp: 1652067074

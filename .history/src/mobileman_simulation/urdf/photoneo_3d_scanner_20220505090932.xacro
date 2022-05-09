@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="photoneo_xacro">
+
+    <!--PhoXi 3D Scanner (M)  -->
+    <link name="photoneo_body">
+        <inertial>
+            <origin xyz="0.011952 0.0002462 -6.0567E-05" rpy="0 0 0" />
+            <mass value="0.067361" />
+            <inertia ixx="4.1058E-05" ixy="3.6778E-07" ixz="-1.7672E-09" iyy="5.9376E-06" iyz="-4.2174E-09" izz="4.1185E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.068 0.416 0.077" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.1 0.1 0.02" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="photoneo_3d_scanner_joint" type="revolute">
+        <origin xyz="-0.12 0.75 0" rpy="1.571 0 0" />
+        <parent link="Link1" />
+        <child link="photoneo_3d_scanner" />
+        <axis xyz="0 0 1" />
+        <limit lower="0.0" upper="1.6" effort="50" velocity="10" />
+    </joint>
+
+    <gazebo reference="photoneo_3d_scanner">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+
+</robot>

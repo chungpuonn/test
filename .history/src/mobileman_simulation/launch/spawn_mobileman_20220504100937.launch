@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--spwan a robot in gazebo-->
+<launch>
+  <!-- load robot description -->
+  <param name="robot_description" command="xacro '$(find mobileman_simulation)/urdf/mobileman_gazebo.xacro'" />
+  <arg name="x" default="0" />
+  <arg name="y" default="1" />
+  <arg name="z" default="0.42" />
+  <arg name="yaw" default="0.0" />
+  <arg name="robotname" default="spawn_mobileman" />
+
+  <node name="$(arg robotname)" pkg="gazebo_ros" type="spawn_model" args="-x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -Y $(arg yaw) -param robot_description -urdf -model mobileman" output="screen" />
+
+  <!--Adding base controller and fork_lift controllers-->
+  <include file="$(find mobileman_simulation)/launch/robot_controller.launch" />
+
+
+  <!-- Adding transforamtion to the simulated sensors -->
+  <!--TF transformations are handled by robot state publisher  -->
+  <!-- <node
+  name="joint_state_publisher"
+  pkg="joint_state_publisher"
+  type="joint_state_publisher"> -->
+  <!-- <rosparam param="source_list">["prototype2/joint_states"]</rosparam> -->
+  <!-- </node> -->
+  <!-- <node
+     name="robot_state_publisher"
+     pkg="robot_state_publisher"
+     type="robot_state_publisher" />
+  -->
+  <!--<include file="$(find mobileman_simulation)/launch/tf_broadcasts.launch"/>-->
+
+</launch>

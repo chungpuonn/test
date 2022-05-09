@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="c5_xacro">
+
+    <!--PhoXi 3D Scanner (M) - body -->
+    <link name="c5_link">
+        <inertial>
+            <origin xyz="0.011952 0.0002462 -6.0567E-05" rpy="0 0 0" />
+            <mass value="0.067361" />
+            <inertia ixx="4.1058E-05" ixy="3.6778E-07" ixz="-1.7672E-09" iyy="5.9376E-06" iyz="-4.2174E-09" izz="4.1185E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.068 0.416 0.077" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.1 0.1 0.02" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="photoneo_3d_scanner_joint" type="revolute">
+        <origin xyz="0.71 -0.55 -0.25" rpy="0 -1.571 0" />
+        <parent link="Link2" />
+        <child link="c5_link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-0.6" upper="0.9" effort="50" velocity="10" />
+    </joint>
+
+    <gazebo reference="c5_link">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+
+    <!-- Sensor plugin -->
+
+    <xacro:arg name="x" default="0"/>
+    <xacro:arg name="y" default="0"/>
+    <xacro:arg name="z" default="0"/>
+
+    <link name="sensor_link">
+        <inertial>
+            <origin xyz="$(arg x) $(arg y) $(arg z)" />
+            <mass value="0.5" />
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+        </inertial>
+        <visual>
+            <origin xyz="$(arg x) $(arg y) $(arg z)"/>
+            <geometry>
+                <cylinder length="0.002" radius="0.001"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="$(arg x) $(arg y) $(arg z)"/>
+            <geometry>
+                <cylinder length="0.002" radius="0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <gazebo reference="sensor_link">
+        <static>true</static>
+        <sensor type="gpu_ray" name="leica_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>40</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>512</samples>
+                        <resolution>1</resolution> 
+                        <min_angle>-1.04</min_angle> <!-- Be sure the angle between min and max angle is > 1.5708 -->
+                        <max_angle>0.8</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.15</min>
+                    <max>8.0</max>
+                    <resolution>0.004</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.0</stddev>
+                </noise>
+            </ray>
+            <plugin name="leica_plugin" filename="libleica_plugin.so">
+                <topicName>/c5/simulator/scan</topicName>
+                <frameName>sensor_link</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="sensor_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="1.571 0 3.142"/>
+        <parent link="c5_link"/>
+        <child link="sensor_link"/>
+    </joint>
+
+</robot>
