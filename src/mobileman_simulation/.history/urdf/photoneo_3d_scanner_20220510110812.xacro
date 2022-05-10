@@ -35,7 +35,8 @@
         <material>Gazebo/FlatBlack</material>
     </gazebo>
 
-    <!-- Laser Sensor ray -->
+    <!-- Sensor plugin -->
+
     <xacro:arg name="x" default="0" />
     <xacro:arg name="y" default="0" />
     <xacro:arg name="z" default="0" />
@@ -63,7 +64,7 @@
         </collision>
     </link>
 
-    <!-- A GAZEBO plugin to mimic 3D laser scanning action -->
+    <!-- A gazebo plugin to mimic 3D laser scanning action -->
     <!-- From http://wiki.ros.org/leica_gazebo_simulation -->
     <gazebo reference="sensor_link">
         <static>true</static>

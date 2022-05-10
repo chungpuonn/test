@@ -35,7 +35,8 @@
         <material>Gazebo/FlatBlack</material>
     </gazebo>
 
-    <!-- Laser Sensor ray -->
+    <!-- Sensor plugin -->
+
     <xacro:arg name="x" default="0" />
     <xacro:arg name="y" default="0" />
     <xacro:arg name="z" default="0" />
