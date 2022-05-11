@@ -1,8 +1,0 @@
-<launch>
-    <!--  this file launches the rviz environment with a robot model-->
-<!--    to visualize the robot, the sensor information and the maps only-->
-
-    <node name="rviz" pkg="rviz" type="rviz" required="true"
-          args="-d $(find mobileman_navigation)/config/rviz.rviz"/>
-<!--    rviz.rviz is only used for this file-->
-</launch>

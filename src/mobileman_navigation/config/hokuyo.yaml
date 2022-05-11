@@ -1,3 +1,0 @@
-## Hokuyo Device Setting
-ip_address: "192.168.10.201"
-frame_id: "hokuyo_link"

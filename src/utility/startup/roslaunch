@@ -1,7 +1,0 @@
-#!/bin/bash
-source ~/mobileman/devel/setup.bash
-source /etc/ros/env.sh
-export ROS_HOME=$(echo ~USERNAME)/.ros
-[TODO place your roslaunch command here] &
-PID=$!
-wait “$PID”
