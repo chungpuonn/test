@@ -6,26 +6,23 @@
     <link name="photoneo_pan_link">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0" />
-            <mass value="3.0" />
-            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="6E-04" />
+            <mass value="1.0" />
+            <inertia ixx="4.1058E-05" ixy="3.6778E-07" ixz="-1.7672E-09" iyy="5.9376E-06" iyz="-4.2174E-09" izz="4.1185E-05" />
         </inertial>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <cylinder radius="0.02" length="0.51" />
+                <cylinder radius="0.02" length="0.69"/>
             </geometry>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <cylinder radius="0.02" length="0.48" />
+                <cylinder radius="0.02" length="0.79"/>
             </geometry>
         </collision>
     </link>
 
-    <gazebo reference="photoneo_pan_link">
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
 
     <!--Photoneo (PhoXi) 3D Scanner (M) - body -->
     <link name="c5_link">
@@ -48,20 +45,18 @@
         </collision>
     </link>
 
-    <joint name="photoneo_pan_joint" type="revolute">
-        <origin xyz="0.48 -0.55 -0.16" rpy="0 1.571 0" />
+    <joint name="Link2_joint" type="fixed">
+        <origin xyz="0.79 -0.55 -0.19" rpy="0 1.571 0" />
         <parent link="Link2" />
         <child link="photoneo_pan_link" />
-        <axis xyz="0 0 1" />
-        <limit lower="-0.9" upper="0.9" effort="50" velocity="10" />
     </joint>
 
-    <joint name="photoneo_tilt_joint" type="revolute">
-        <origin xyz="0 0 0.33" rpy="0 0 0" />
-        <parent link="photoneo_pan_link" />
+    <joint name="photoneo_3d_scanner_joint" type="revolute">
+        <origin xyz="0.79 -0.55 -0.19" rpy="0 1.571 0" />
+        <parent link="Link2" />
         <child link="c5_link" />
-        <axis xyz="0 1 0" />
-        <limit lower="-0.8" upper="0.6" effort="50" velocity="10" />
+        <axis xyz="0 0 1" />
+        <limit lower="-0.6" upper="0.9" effort="50" velocity="10" />
     </joint>
 
     <gazebo reference="c5_link">

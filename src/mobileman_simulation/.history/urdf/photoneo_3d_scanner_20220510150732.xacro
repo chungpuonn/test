@@ -6,8 +6,8 @@
     <link name="photoneo_pan_link">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0" />
-            <mass value="3.0" />
-            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="6E-04" />
+            <mass value="1.0" />
+            <inertia ixx="4.1058E-05" ixy="3.6778E-07" ixz="-1.7672E-09" iyy="5.9376E-06" iyz="-4.2174E-09" izz="4.1185E-05" />
         </inertial>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />

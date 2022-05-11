@@ -57,5 +57,4 @@ controller_list:
     joints:
       - fork_rotational_joint
       - fork_linear_joint
-      - photoneo_pan_joint
-      - photoneo_tilt_joint
+      - photoneo_3d_scanner_joint
